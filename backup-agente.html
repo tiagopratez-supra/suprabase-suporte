@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte SupraMAIS - Backup (Agente)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script src="js/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="app">
+
+<aside class="sidebar">
+    <div class="brand">
+      <img src="img/logo.png" alt="SupraMAIS">
+      <div class="title">
+        <strong>Base do Suporte</strong>
+        <span>Procedimentos e checklists</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="" href="home.html">🏠 Home</a>
+
+      <div class="nav-group">
+        <h3>Banco de Dados</h3>
+        <a class="" href="script-versao.html">📄 Script de Versão</a>
+        <a class="" href="profile-sql.html">🧪 SQL Server Profile</a>
+      </div>
+
+      <div class="nav-group">
+        <h3>Configuração de Parâmetros</h3>
+        <a class="" href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="configuracao-email.html">📧 Configuração de E-mail</a>
+        <a class="active" href="backup-agente.html">🗄️ Backup - Agente SupraMAIS</a>
+      </div>
+    </div>
+  </aside>
+
+  <section class="content">
+
+    <div class="topbar">
+      <h1>🗄️ Backup - Agente do SupraMAIS</h1>
+
+      <div class="topbar-actions">
+        <span class="badge">SupraMAIS</span>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <div class="section">
+        <h2>Conceito</h2>
+        <ul>
+          <li><strong>O que é?</strong> Serviço instalado no Windows para realizar o backup dos bancos de dados dos clientes (também utilizado para rotinas automatizadas do SupraMAIS).</li>
+          <li><strong>Quem cria?</strong> É criado no ato da execução do atualizador de versão (ideal no mesmo servidor da pasta <code>SupraSGC</code>).</li>
+          <li><strong>Onde habilita?</strong> Nos serviços do Windows.</li>
+          <li><strong>Onde ficam?</strong> Serviços do Windows (iniciar/parar/reiniciar) — nome: <strong>Agente do SupraMAIS</strong>.</li>
+          <li><strong>Como funciona?</strong> Rotina diária que verifica o horário configurado e executa o backup.</li>
+        </ul>
+
+        <h3>O que é preciso para o backup ser realizado?</h3>
+        <p>Na pasta <code>SupraSGC</code> deve existir:</p>
+        <ul>
+          <li><code>SupraMaisServico.exe</code> (executável do serviço)</li>
+          <li><code>dbConn.sup</code> (configurado com o nome dos bancos)</li>
+          <li><code>Rar.exe</code> (para compactação do backup)</li>
+        </ul>
+
+        <p><img src="img/doc/backup-arquivos.png" alt="Arquivos necessários para o agente de backup (dbConn.sup, Rar.exe, SupraMaisServico.exe)"></p>
+      </div>
+
+      <div class="section">
+        <h2>Curiosidades sobre o serviço do agente</h2>
+        <ul>
+          <li>Não criar nome das empresas com espaço. Use <code>_</code> ou <code>-</code> (ex.: <code>empresa_xxx</code> ou <code>empresa-xxx</code>). Espaços podem afetar a compactação e impedir o backup; se houver mais de uma empresa, se não finalizar uma não inicia a outra.</li>
+          <li>Existe um log que registra o backup e, em alguns casos, o motivo do backup não ser feito (arquivo TXT na pasta <code>SupraSGC</code>).</li>
+          <li>O agente cria primeiro o <code>.bak</code> (backup), depois compacta para <code>.rar</code> e apaga o <code>.bak</code>.</li>
+        </ul>
+
+        <p><img src="img/doc/backup-log.png" alt="Exemplo de log do serviço do agente"></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

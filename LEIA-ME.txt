@@ -1,0 +1,12 @@
+Substitua os HTMLs correspondentes na raiz do seu projeto e copie a pasta 'img/doc' para dentro da pasta 'img' do site.
+
+Arquivos gerados:
+- home.html
+- script-versao.html
+- profile-sql.html
+- replicacao.html
+- configuracao-email.html
+- backup-agente.html
+
+Imagens:
+- img/doc/*.png

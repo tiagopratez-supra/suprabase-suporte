@@ -17,8 +17,31 @@
 body{
   margin:0;
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
   color: var(--text);
+
+  /* Fundo padrão */
+  background-color: var(--bg);
+  background-image: url("../img/fundo-supra.jpg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Overlay para o fundo aparecer melhor (sem mexer no template) */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.55); /* ajuste: 0.45 a 0.70 */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Garante que o conteúdo fique acima do overlay */
+.app, .login-box{
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== LAYOUT ===== */
@@ -249,7 +272,7 @@ body{
 
 /* ===== LOGIN ===== */
 .login-body{
-  background: linear-gradient(135deg, #ffffff, #f2f2f2);
+  /* mantém a centralização */
   display:flex;
   justify-content:center;
   align-items:center;

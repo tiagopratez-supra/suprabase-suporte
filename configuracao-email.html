@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte SupraMAIS - Configuração de E-mail</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script src="js/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="app">
+
+<aside class="sidebar">
+    <div class="brand">
+      <img src="img/logo.png" alt="SupraMAIS">
+      <div class="title">
+        <strong>Base do Suporte</strong>
+        <span>Procedimentos e checklists</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="" href="home.html">🏠 Home</a>
+
+      <div class="nav-group">
+        <h3>Banco de Dados</h3>
+        <a class="" href="script-versao.html">📄 Script de Versão</a>
+        <a class="" href="profile-sql.html">🧪 SQL Server Profile</a>
+      </div>
+
+      <div class="nav-group">
+        <h3>Configuração de Parâmetros</h3>
+        <a class="" href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="active" href="configuracao-email.html">📧 Configuração de E-mail</a>
+        <a class="" href="backup-agente.html">🗄️ Backup - Agente SupraMAIS</a>
+      </div>
+    </div>
+  </aside>
+
+  <section class="content">
+
+    <div class="topbar">
+      <h1>📧 Configuração de E-mail</h1>
+
+      <div class="topbar-actions">
+        <span class="badge">SupraMAIS</span>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <div class="section">
+        <h2>Conceito</h2>
+        <ul>
+          <li><strong>O que é?</strong> E-mail utilizado para envio de notas fiscais, boletos, pedidos, propostas, ordem de compra e correspondências do sistema.</li>
+          <li><strong>Importante:</strong> a configuração de e-mail utilizada pelo Supra é semelhante a POP3.</li>
+          <li><strong>Onde habilita?</strong> E-mail padrão em Ferramentas &gt; configuração de parâmetros &gt; aba Internet.</li>
+          <li><strong>Como funciona?</strong> Após configurar no parâmetro Internet, configurar também:
+            <ul>
+              <li>Parâmetro Nota Fiscal &gt; E-mail</li>
+              <li>Parâmetro Financeiro &gt; Contas a Receber &gt; E-mail</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><img src="img/doc/email-internet.png" alt="Tela de configuração de e-mail (Internet)"></p>
+      </div>
+
+      <div class="section">
+        <h2>Campos principais</h2>
+        <ul>
+          <li><strong>Sufixo do E-mail:</strong> domínio do e-mail do cliente.</li>
+          <li><strong>Porta SMTP:</strong> porta de conexão com o provedor (normalmente 465 ou 587).</li>
+          <li><strong>Usuário SMTP:</strong> e-mail padrão do cliente.</li>
+          <li><strong>Senha SMTP:</strong> senha do e-mail padrão.</li>
+          <li><strong>Servidor SMTP saída:</strong> servidor SMTP do provedor (informado pelo cliente/provedor).</li>
+          <li><strong>Servidor de autenticação TLS:</strong> segurança usada pela maioria dos provedores atualmente.</li>
+          <li><strong>Servidor de Criptografia SSL:</strong> segurança opcional; quando usado, normalmente a porta é 465.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Curiosidades</h2>
+        <ul>
+          <li>O e-mail configurado no parâmetro Internet é o padrão de todo o sistema. Assim, todos os demais e-mails configurados (nota, financeiro, vendedor/comprador etc.) obrigatoriamente devem ser do mesmo sufixo.</li>
+          <li>Dar preferência para opção <strong>SupraMAIS</strong> e formato <strong>PDF</strong>. (HTML atualmente não é mais utilizado.)</li>
+          <li>Provedores mais novos (Gmail/Microsoft) podem exigir configuração adicional.</li>
+        </ul>
+
+        <p><img src="img/doc/email-opcoes-formato.png" alt="Opções de envio e formato (SupraMAIS, PDF)"></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

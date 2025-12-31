@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Script de Versão - SupraMAIS</title>
+  <title>Suporte SupraMAIS - Script de Versão</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 <div class="app">
 
-  <aside class="sidebar">
+<aside class="sidebar">
     <div class="brand">
       <img src="img/logo.png" alt="SupraMAIS">
       <div class="title">
@@ -22,27 +22,30 @@
     </div>
 
     <div class="nav">
-      <a href="home.html">🏠 Home</a>
+      <a class="" href="home.html">🏠 Home</a>
 
       <div class="nav-group">
         <h3>Banco de Dados</h3>
         <a class="active" href="script-versao.html">📄 Script de Versão</a>
-        <a href="profile-sql.html">🧪 SQL Server Profile</a>
+        <a class="" href="profile-sql.html">🧪 SQL Server Profile</a>
       </div>
 
       <div class="nav-group">
         <h3>Configuração de Parâmetros</h3>
-        <a href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="configuracao-email.html">📧 Configuração de E-mail</a>
+        <a class="" href="backup-agente.html">🗄️ Backup - Agente SupraMAIS</a>
       </div>
     </div>
   </aside>
 
   <section class="content">
+
     <div class="topbar">
       <h1>📄 Script de Versão</h1>
 
       <div class="topbar-actions">
-        <span class="badge">Banco de Dados</span>
+        <span class="badge">SupraMAIS</span>
         <button class="btn-logout" onclick="logout()">Sair</button>
       </div>
     </div>
@@ -50,121 +53,50 @@
     <div class="main">
 
       <div class="section">
-        <h2>O que é</h2>
-        <p>
-          Scripts de versão são comandos SQL responsáveis por criar, alterar ou remover estruturas do banco de dados,
-          como tabelas, campos, procedures, funções e parâmetros. Normalmente são numerados sequencialmente.
-        </p>
-        <div class="callout ok">
-          ✅ <strong>Quem cria?</strong> Desenvolvimento.<br>
-          ✅ <strong>Como são executados?</strong> Pela atualização de versão do SupraMAIS.<br>
-          ✅ <strong>Onde ficam?</strong> Na pasta <strong>SQL</strong> dentro da pasta <strong>SupraSGC</strong>.
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Onde ficam</h2>
-        <p>
-          Os scripts ficam em:
-          <strong>SupraSGC\SQL</strong>
-        </p>
-      </div>
-
-      <div class="section">
-        <h2>Como saber em qual script o banco do cliente está</h2>
+        <h2>Conceito</h2>
         <ul>
-          <li>Acessar o SupraMAIS</li>
-          <li>Ir no menu <strong>Ajuda &gt; Sobre</strong></li>
-          <li>Verificar a informação de versão/script exibida</li>
+          <li><strong>O que é?</strong> São os SQL que criam ou removem campos do banco de dados, normalmente numerados sequencialmente.</li>
+          <li><strong>Quem cria?</strong> São criados pelo Desenvolvimento.</li>
+          <li><strong>Como são executados?</strong> Através da atualização de versão.</li>
+          <li><strong>Onde ficam?</strong> Na pasta <code>SQL</code> dentro da pasta <code>SupraSGC</code>.</li>
+          <li><strong>Como saber em qual script o banco do cliente está?</strong> Acessar o menu <em>Ajuda &gt; Sobre</em> no SupraMAIS.</li>
         </ul>
+
+        <p><img src="img/doc/sobre-versao-bd.png" alt="Ajuda > Sobre mostrando Versão BD"></p>
       </div>
 
       <div class="section">
-        <h2>Como suspeitar que um script não rodou</h2>
+        <h2>Como saber se não rodou algum script de versão no banco de dados</h2>
+
+        <p>Normalmente é exibido alguma mensagem de erro ao acessar o sistema ou o parâmetro.</p>
+        <p>Nem todos os scripts que não rodaram dão erro ao acessar o sistema ou parâmetro, pode ser em alguma outra tela especificamente.</p>
+
+        <h3>Exemplos comuns de erro</h3>
         <ul>
-          <li>Erro ao acessar o sistema, uma tela ou um parâmetro</li>
-          <li>Mensagem indicando objeto/campo inexistente</li>
-          <li>Erro em relatório/rotina específica</li>
+          <li><strong>Script que não rodou, mas pode não afetar login/telas</strong><br>
+            Ex.: Nome de objeto <code>'gera_p1_livros_fiscais'</code> inválido. (erro ao gerar um relatório fiscal)</li>
+          <li><strong>Erro ao acessar o sistema ou parâmetro</strong><br>
+            Ex.: Nome de objeto <code>'parametro_ecs_colopast'</code> inválido.</li>
         </ul>
 
-        <div class="callout warn">
-          ⚠️ Nem todo script não rodado impede abrir o sistema — alguns afetam apenas relatórios ou telas específicas.
-        </div>
+        <h3>Verificação pela pasta SupraSGC (arquivo TXT)</h3>
+        <p>Para verificar se um script não rodou, acessar a pasta <code>SupraSGC</code>. Lá terá um arquivo TXT conforme exemplo abaixo.</p>
+        <p><img src="img/doc/atualizacao-log.png" alt="Arquivo de log de atualização na pasta SupraSGC"></p>
+
+        <p>Abrir o arquivo e verificar o script. Antes de rodar manualmente novamente o script, verificar se pode gerar algum efeito colateral. Na dúvida, pergunte.</p>
+
+        <h3>Localizar um script/campo pelo SQL Server (Localizar nos Arquivos)</h3>
+        <p>Ir no SQL em <em>Localizar e Substituir</em> &gt; <em>Localização Rápida</em> (Ctrl + F).</p>
+        <p><img src="img/doc/ssms-menu-ctrlf.png" alt="Menu do SQL Server para Localização Rápida (Ctrl+F)"></p>
+
+        <p>Na tela de pesquisa, em <strong>Localizar</strong> coloque o nome do campo que procura e, em <strong>Examinar</strong>, aponte para a pasta <code>SQL</code> da sua máquina. Depois clique em <strong>Localizar Tudo</strong>.</p>
+        <p><img src="img/doc/ssms-localizar-nos-arquivos.png" alt="Janela Localizar nos Arquivos do SSMS"></p>
+
+        <p>Será exibido no resultado todos os scripts contendo este campo. Não necessariamente será o maior número — terá que analisar o caso para entender qual utilizar. Para abrir o script, dê duplo clique sobre o mesmo.</p>
+        <p><img src="img/doc/ssms-resultados-localizar.png" alt="Resultado da busca mostrando script de versão"></p>
+
+        <p>Neste exemplo, o script que criou o <code>parametro_ecs_coloplast</code> é o de número <strong>2966</strong>.</p>
       </div>
-
-      <div class="section">
-        <h2>Exemplos de erro</h2>
-
-        <div class="callout warn">
-          ⚠️ <strong>Script não rodou, mas pode não afetar acesso</strong><br>
-          Ex.: <em>Nome de objeto 'gera_p1_livros_fiscais' inválido.</em><br>
-          Normalmente impacta apenas uma rotina/relatório.
-        </div>
-
-        <div class="callout danger">
-          ❌ <strong>Erro ao acessar tela/parâmetro por falta de script</strong><br>
-          Ex.: <em>Nome de objeto 'parametro_ecs_coloplast' inválido.</em><br>
-          Indica campo/objeto inexistente no banco.
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Checklist rápido</h2>
-        <ul class="checklist">
-          <li>☐ Capturar a mensagem exata do erro (copiar/print)</li>
-          <li>☐ Confirmar qual banco de dados está em uso</li>
-          <li>☐ Verificar versão/script no Ajuda &gt; Sobre</li>
-          <li>☐ Identificar se o erro é geral (sistema) ou específico (tela/relatório)</li>
-          <li>☐ Verificar se há mais de um banco (replicação / multi-banco)</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>Como verificar se algum script não rodou (via TXT)</h2>
-        <p>
-          Acesse a pasta <strong>SupraSGC</strong> e localize o arquivo <strong>.TXT</strong>
-          gerado pela atualização (normalmente registra informações/execuções).
-        </p>
-        <div class="callout warn">
-          ⚠️ Antes de rodar manualmente um script, avalie se pode gerar efeito colateral. Na dúvida, pergunte.
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Como localizar o script/campo responsável (via SQL Server)</h2>
-        <p>
-          No SSMS, use <strong>Ctrl + F</strong> e pesquise o nome do campo/objeto apontando o “Examinar”
-          para <strong>SupraSGC\SQL</strong>.
-        </p>
-        <ol>
-          <li>Abra o <strong>SQL Server Management Studio</strong></li>
-          <li>Pressione <strong>Ctrl + F</strong></li>
-          <li>Em <strong>Localizar</strong>, digite o nome do campo/objeto</li>
-          <li>Em <strong>Examinar</strong>, selecione a pasta <strong>SupraSGC\SQL</strong></li>
-          <li>Clique em <strong>Localizar tudo</strong></li>
-          <li>Dê duplo clique em um resultado para abrir o script</li>
-        </ol>
-
-        <div class="callout ok">
-          ✅ Dica: nem sempre o script correto é o de maior número. Analise o contexto antes de executar.
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Cuidados antes de executar script manualmente</h2>
-        <ul>
-          <li>Verificar se o script depende de outro script anterior</li>
-          <li>Confirmar se o banco afetado está realmente desatualizado</li>
-          <li>Em ambientes com replicação/multi-banco, confirmar se todos os bancos foram atualizados</li>
-          <li>Se o script altera dados (não só estrutura), redobrar atenção</li>
-        </ul>
-
-        <div class="callout warn">
-          ⚠️ Em muitos casos, abrir o banco que está “para trás” após a atualização resolve.
-          Confirme o cenário antes de tomar ação manual.
-        </div>
-      </div>
-
     </div>
   </section>
 

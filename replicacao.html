@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Replicação de Dados - SupraMAIS</title>
+  <title>Suporte SupraMAIS - Replicação de Dados</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 <div class="app">
 
-  <aside class="sidebar">
+<aside class="sidebar">
     <div class="brand">
       <img src="img/logo.png" alt="SupraMAIS">
       <div class="title">
@@ -22,27 +22,30 @@
     </div>
 
     <div class="nav">
-      <a href="home.html">🏠 Home</a>
+      <a class="" href="home.html">🏠 Home</a>
 
       <div class="nav-group">
         <h3>Banco de Dados</h3>
-        <a href="script-versao.html">📄 Script de Versão</a>
-        <a href="profile-sql.html">🧪 SQL Server Profile</a>
+        <a class="" href="script-versao.html">📄 Script de Versão</a>
+        <a class="" href="profile-sql.html">🧪 SQL Server Profile</a>
       </div>
 
       <div class="nav-group">
         <h3>Configuração de Parâmetros</h3>
         <a class="active" href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="configuracao-email.html">📧 Configuração de E-mail</a>
+        <a class="" href="backup-agente.html">🗄️ Backup - Agente SupraMAIS</a>
       </div>
     </div>
   </aside>
 
   <section class="content">
+
     <div class="topbar">
       <h1>🔁 Replicação de Dados</h1>
 
       <div class="topbar-actions">
-        <span class="badge">Configuração de Parâmetros</span>
+        <span class="badge">SupraMAIS</span>
         <button class="btn-logout" onclick="logout()">Sair</button>
       </div>
     </div>
@@ -50,80 +53,42 @@
     <div class="main">
 
       <div class="section">
-        <h2>O que é</h2>
-        <p>
-          Replicação é uma configuração utilizada para clonar determinadas informações/tabelas entre bancos de dados
-          (multi-banco), garantindo que cadastros e configurações existam em mais de um banco do cliente.
-        </p>
-      </div>
-
-      <div class="section">
-        <h2>Onde habilita</h2>
+        <h2>Conceito</h2>
         <ul>
-          <li><strong>Ferramentas</strong> &gt; <strong>Configuração de Parâmetros</strong> &gt; aba <strong>Sistema</strong> (habilita com senha máster)</li>
-          <li>Depois: <strong>Ferramentas</strong> &gt; <strong>Configuração de Parâmetros</strong> &gt; aba <strong>Integrações</strong> &gt; <strong>Replicação</strong></li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>Como funciona (conceitos)</h2>
-        <ul>
-          <li><strong>Bancos de dados:</strong> bancos que replicam dados entre si (sigla aparece em relatórios multi-banco).</li>
-          <li><strong>Tabelas Principais:</strong> cadastros principais (ex.: Produto, Cliente/Fornecedor, Tipos, etc.).</li>
-          <li><strong>Tabelas Agregadas:</strong> tabelas auxiliares sem janela própria (ex.: Contato, Endereço, conversões etc.).</li>
-          <li><strong>Campos Exceção:</strong> campos que não devem replicar (por regra do sistema ou necessidade do cliente).</li>
+          <li><strong>O que é?</strong> É uma configuração para que algumas informações de tabelas sejam clonadas entre bancos de dados.</li>
+          <li><strong>Quem cria?</strong> É criado no ato da instalação de um banco adicional do cliente, caso ele desejar.</li>
+          <li><strong>Onde habilita?</strong> Ferramentas &gt; configuração de parâmetros &gt; aba sistema (somente habilitado pela senha máster).</li>
+          <li><strong>Onde ficam?</strong> Quando habilitado: Ferramentas &gt; configuração de parâmetros &gt; aba integrações &gt; replicação.</li>
         </ul>
 
-        <div class="callout warn">
-          ⚠️ Nem sempre “colocar como exceção” resolve erro de replicação. Cada caso deve ser avaliado.
-        </div>
+        <h3>Como funciona</h3>
+        <ol>
+          <li><strong>Bancos de dados</strong>: que replicam os dados entre si (a sigla é exibida em relatórios/telas multi-bancos).</li>
+          <li><strong>Tabelas principais</strong>: que serão replicadas (ex.: Produto, cliente/fornecedor, tipos de pedido, tipos de nota, etc.).</li>
+          <li><strong>Tabelas agregadas</strong>: tabelas necessárias para um cadastro sem janela específica (ex.: Contato, Endereço, unidade de conversão, etc.).</li>
+          <li><strong>Campos exceção</strong>: campos que não podem replicar (por solicitação do cliente ou necessidade do SupraMAIS).</li>
+        </ol>
+
+        <p><strong>Observação:</strong> sempre que configurado, 3 exceções são obrigatórias para todo cliente: Produto (Quantidade estoque), Vendedor (Imagem assinatura) e Cliente (Cobrança).</p>
+
+        <p><img src="img/doc/replicacao-tela.png" alt="Tela de replicação (Bancos, Tabelas, Agregadas e Exceções)"></p>
       </div>
 
       <div class="section">
-        <h2>Checklist rápido (quando dá erro de replicação)</h2>
-        <ul class="checklist">
-          <li>☐ Capturar a mensagem completa do erro (banco, tabela e campo)</li>
-          <li>☐ Confirmar se todos os bancos envolvidos foram atualizados</li>
-          <li>☐ Verificar se o campo/tabela existe em TODOS os bancos</li>
-          <li>☐ Identificar se o erro é falta de script, FK, ou cadastro faltando no destino</li>
-        </ul>
-      </div>
+        <h2>Exemplos de erros</h2>
 
-      <div class="section">
-        <h2>Exemplo 1 — Coluna inválida</h2>
-        <div class="callout danger">
-          ❌ <strong>Erro:</strong> “Nome de coluna 'catpro_codigo' inválido. Banco: SGC Tabela: produto”
-        </div>
-        <p style="margin-top:10px;">
-          Normalmente indica que o campo não foi criado em algum banco que participa da replicação (script não executou ou banco não atualizado).
-        </p>
-        <div class="callout ok">
-          ✅ <strong>Ação recomendada:</strong> garantir que todos os bancos estão atualizados e confirmar se o campo existe na tabela em todos eles.
-        </div>
-      </div>
+        <p><strong>Atenção:</strong> nem sempre colocar campo como exceção é solução para erro de replicação. Cada caso deve ser avaliado individualmente — nunca utilizar sem análise detalhada.</p>
 
-      <div class="section">
-        <h2>Exemplo 2 — Conflito de Foreign Key</h2>
-        <div class="callout danger">
-          ❌ <strong>Erro:</strong> “INSERT conflitou com FOREIGN KEY... tabela PRINCIPIO_ATIVO...”
-        </div>
-        <p style="margin-top:10px;">
-          Indica que o cadastro referenciado existe no banco de origem, mas não existe no banco de destino.
-        </p>
-        <div class="callout ok">
-          ✅ <strong>Ação recomendada:</strong> verificar o cadastro vinculado e garantir que ele exista/replica corretamente no banco de destino.
-        </div>
-      </div>
+        <h3>Erro: Nome de coluna inválido</h3>
+        <p><strong>Erro:</strong> “Nome de coluna <code>'catpro_codigo'</code> inválido Banco: SGC Tabela: produto”</p>
+        <p><strong>Possível causa:</strong> o campo não foi criado em algum dos bancos que replicam (script não executado/cliente não abriu um banco, ou banco não atualizado — comum em bancos antigos que continuam na replicação).</p>
+        <p><strong>Solução:</strong> garantir que todos os bancos estão atualizados, conferir se o campo existe na tabela produto em todos os bancos; abrir o banco indicado no erro para forçar a execução do script responsável.</p>
 
-      <div class="section">
-        <h2>Observações importantes</h2>
-        <ul>
-          <li>Em muitos casos o problema é banco “esquecido” na replicação (banco antigo ou não atualizado)</li>
-          <li>Antes de alterar exceções, sempre entender a causa raiz</li>
-          <li>Se envolver regra do cliente (não replicar campo), documentar a decisão e motivo</li>
-        </ul>
+        <h3>Erro: conflito de chave estrangeira (FOREIGN KEY)</h3>
+        <p><strong>Erro:</strong> “Replicação cancelada. Não foi possível replicar os dados. Banco: SGC2 Tabela: produto ... INSERT conflitou com a restrição do FOREIGN KEY <code>FK_principio_ativo</code> ... tabela <code>PRINCIPIO_ATIVO</code>”</p>
+        <p><strong>Possível causa:</strong> o <em>princípio ativo</em> vinculado ao produto não existia no banco de destino.</p>
+        <p><strong>Solução:</strong> verificar se o princípio ativo existe no banco de destino; se não existir, corrigir/cadastrar e então ajustar a replicação do princípio ativo.</p>
       </div>
-
     </div>
   </section>
 

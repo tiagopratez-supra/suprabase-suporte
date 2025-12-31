@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>SQL Server Profile - SupraMAIS</title>
+  <title>Suporte SupraMAIS - SQL Server Profile</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 <div class="app">
 
-  <aside class="sidebar">
+<aside class="sidebar">
     <div class="brand">
       <img src="img/logo.png" alt="SupraMAIS">
       <div class="title">
@@ -22,27 +22,30 @@
     </div>
 
     <div class="nav">
-      <a href="home.html">🏠 Home</a>
+      <a class="" href="home.html">🏠 Home</a>
 
       <div class="nav-group">
         <h3>Banco de Dados</h3>
-        <a href="script-versao.html">📄 Script de Versão</a>
+        <a class="" href="script-versao.html">📄 Script de Versão</a>
         <a class="active" href="profile-sql.html">🧪 SQL Server Profile</a>
       </div>
 
       <div class="nav-group">
         <h3>Configuração de Parâmetros</h3>
-        <a href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="replicacao.html">🔁 Replicação de Dados</a>
+        <a class="" href="configuracao-email.html">📧 Configuração de E-mail</a>
+        <a class="" href="backup-agente.html">🗄️ Backup - Agente SupraMAIS</a>
       </div>
     </div>
   </aside>
 
   <section class="content">
+
     <div class="topbar">
       <h1>🧪 SQL Server Profile</h1>
 
       <div class="topbar-actions">
-        <span class="badge">Banco de Dados</span>
+        <span class="badge">SupraMAIS</span>
         <button class="btn-logout" onclick="logout()">Sair</button>
       </div>
     </div>
@@ -50,62 +53,35 @@
     <div class="main">
 
       <div class="section">
-        <h2>O que é</h2>
-        <p>
-          O SQL Server Profile é uma ferramenta que monitora operações executadas no SQL Server enquanto está ativa.
-          Com ele é possível identificar consultas que o SupraMAIS executa no banco (ex.: SELECT de relatórios).
-        </p>
-        <div class="callout ok">
-          ✅ Ideal para descobrir “qual consulta o sistema usa” para montar um relatório ou buscar dados em uma tela.
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Onde fica</h2>
+        <h2>Conceito</h2>
         <ul>
-          <li>No SQL Server: <strong>Ferramentas</strong> &gt; <strong>SQL Server Profiler</strong></li>
+          <li><strong>O que é?</strong> Ferramenta que monitora o que é feito no SQL Server quando aberta. Permite verificar as consultas que o SupraMAIS realiza no banco (ex.: descobrir o SELECT usado por um relatório).</li>
+          <li><strong>Onde fica?</strong> No SQL: menu <em>Ferramentas</em> &gt; <em>SQL Server Profiler</em>.</li>
         </ul>
       </div>
 
       <div class="section">
-        <h2>Checklist rápido (antes de capturar)</h2>
-        <ul class="checklist">
-          <li>☐ Abrir o SQL Server Profiler</li>
-          <li>☐ Pausar a captura</li>
-          <li>☐ Limpar a tela (evitar mistura de eventos)</li>
-          <li>☐ Preparar o processo no SupraMAIS até a etapa final</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>Passo a passo</h2>
+        <h2>Como usar (passo a passo)</h2>
         <ol>
-          <li>Abrir o <strong>SQL Server Profiler</strong></li>
-          <li><strong>Pausar</strong> e <strong>limpar</strong> os eventos</li>
-          <li>No SupraMAIS, deixar o processo pronto (ex.: relatório na tela de filtros)</li>
-          <li>No Profiler, clicar em <strong>Iniciar</strong></li>
-          <li>No SupraMAIS, executar a ação (ex.: gerar/exibir relatório)</li>
-          <li>Voltar ao Profiler e <strong>Parar</strong></li>
-          <li>Localizar os <strong>SELECT</strong> relacionados</li>
-          <li>Copiar e validar no SSMS (ajustar formato se necessário)</li>
+          <li>Abra o Profiler.</li>
+          <li>Pausar e limpar o que estiver sendo exibido.</li>
+          <li>Após pausado e limpo, volte ao Supra e realize o processo que precisa (ex.: gerar um relatório).</li>
+          <li>Volte ao Profiler para analisar as linhas e identificar o SELECT utilizado.</li>
         </ol>
 
-        <div class="callout warn">
-          ⚠️ Em alguns casos o sistema executa vários SELECTs. Pode ser necessário analisar mais de uma consulta.
-        </div>
+        <p><img src="img/doc/profiler-botoes.png" alt="Profiler - botões de limpar, iniciar e pausar/parar"></p>
+
+        <p>Exemplo: para descobrir como o Supra monta um relatório, vá até a tela de filtros do relatório; antes de mandar exibir, inicie o Profiler. O resultado será exibido após o relatório finalizar no SupraMAIS.</p>
+
+        <p><img src="img/doc/profiler-exemplo.png" alt="Exemplo de saída do Profiler com consultas SQL"></p>
+
+        <p>Será necessário percorrer as linhas para identificar qual é o SELECT. Após identificar, copie e execute no SQL para validar. Obs.: pode ser necessário “tratar” o SELECT (ele vem em formato para o Supra “ler”; por exemplo, datas podem vir com aspas diferentes).</p>
       </div>
 
       <div class="section">
-        <h2>Observações</h2>
-        <ul>
-          <li>O SQL pode vir em formato “adaptado” para o sistema e exigir pequenos ajustes para rodar no SSMS</li>
-          <li>Use o Profiler com cuidado em produção (não deixe capturando por longos períodos)</li>
-        </ul>
-        <div class="callout danger">
-          ❌ Evite deixar o Profiler capturando por muito tempo em ambiente produtivo.
-        </div>
+        <h2>Curiosidade</h2>
+        <p>Nem sempre conseguiremos todas as informações com apenas um SELECT. Em alguns casos são várias consultas e, dependendo do caso, pode não conseguir utilizar.</p>
       </div>
-
     </div>
   </section>
 
