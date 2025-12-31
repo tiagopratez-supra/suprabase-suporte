@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte SupraMAIS - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script src="js/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="img/logo.png" alt="SupraMAIS">
+      <div class="title">
+        <strong>Base do Suporte</strong>
+        <span>Procedimentos e checklists</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="active" href="home.html">🏠 Home</a>
+
+      <div class="nav-group">
+        <h3>Banco de Dados</h3>
+        <a href="script-versao.html">📄 Script de Versão</a>
+        <a href="profile-sql.html">🧪 SQL Server Profile</a>
+      </div>
+
+      <div class="nav-group">
+        <h3>Configuração de Parâmetros</h3>
+        <a href="replicacao.html">🔁 Replicação de Dados</a>
+      </div>
+    </div>
+  </aside>
+
+  <section class="content">
+    <div class="topbar">
+      <h1>🏠 Home</h1>
+
+      <div class="topbar-actions">
+        <span class="badge">SupraMAIS</span>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="section">
+        <h2>Como usar</h2>
+        <ul>
+          <li>Use o menu à esquerda para navegar pelos tópicos.</li>
+          <li>As páginas são feitas para consulta rápida durante o atendimento.</li>
+          <li>Conforme os conteúdos forem criados, novos itens aparecerão no menu.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Tópicos disponíveis (atalhos)</h2>
+        <ul class="links-list">
+          <li><a href="script-versao.html">📄 Script de Versão</a></li>
+          <li><a href="profile-sql.html">🧪 SQL Server Profile</a></li>
+          <li><a href="replicacao.html">🔁 Replicação de Dados</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

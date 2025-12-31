@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Replicação de Dados - SupraMAIS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script src="js/auth.js"></script>
+<script>requireAuth();</script>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="img/logo.png" alt="SupraMAIS">
+      <div class="title">
+        <strong>Base do Suporte</strong>
+        <span>Procedimentos e checklists</span>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a href="home.html">🏠 Home</a>
+
+      <div class="nav-group">
+        <h3>Banco de Dados</h3>
+        <a href="script-versao.html">📄 Script de Versão</a>
+        <a href="profile-sql.html">🧪 SQL Server Profile</a>
+      </div>
+
+      <div class="nav-group">
+        <h3>Configuração de Parâmetros</h3>
+        <a class="active" href="replicacao.html">🔁 Replicação de Dados</a>
+      </div>
+    </div>
+  </aside>
+
+  <section class="content">
+    <div class="topbar">
+      <h1>🔁 Replicação de Dados</h1>
+
+      <div class="topbar-actions">
+        <span class="badge">Configuração de Parâmetros</span>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <div class="section">
+        <h2>O que é</h2>
+        <p>
+          Replicação é uma configuração utilizada para clonar determinadas informações/tabelas entre bancos de dados
+          (multi-banco), garantindo que cadastros e configurações existam em mais de um banco do cliente.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Onde habilita</h2>
+        <ul>
+          <li><strong>Ferramentas</strong> &gt; <strong>Configuração de Parâmetros</strong> &gt; aba <strong>Sistema</strong> (habilita com senha máster)</li>
+          <li>Depois: <strong>Ferramentas</strong> &gt; <strong>Configuração de Parâmetros</strong> &gt; aba <strong>Integrações</strong> &gt; <strong>Replicação</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Como funciona (conceitos)</h2>
+        <ul>
+          <li><strong>Bancos de dados:</strong> bancos que replicam dados entre si (sigla aparece em relatórios multi-banco).</li>
+          <li><strong>Tabelas Principais:</strong> cadastros principais (ex.: Produto, Cliente/Fornecedor, Tipos, etc.).</li>
+          <li><strong>Tabelas Agregadas:</strong> tabelas auxiliares sem janela própria (ex.: Contato, Endereço, conversões etc.).</li>
+          <li><strong>Campos Exceção:</strong> campos que não devem replicar (por regra do sistema ou necessidade do cliente).</li>
+        </ul>
+
+        <div class="callout warn">
+          ⚠️ Nem sempre “colocar como exceção” resolve erro de replicação. Cada caso deve ser avaliado.
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Checklist rápido (quando dá erro de replicação)</h2>
+        <ul class="checklist">
+          <li>☐ Capturar a mensagem completa do erro (banco, tabela e campo)</li>
+          <li>☐ Confirmar se todos os bancos envolvidos foram atualizados</li>
+          <li>☐ Verificar se o campo/tabela existe em TODOS os bancos</li>
+          <li>☐ Identificar se o erro é falta de script, FK, ou cadastro faltando no destino</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Exemplo 1 — Coluna inválida</h2>
+        <div class="callout danger">
+          ❌ <strong>Erro:</strong> “Nome de coluna 'catpro_codigo' inválido. Banco: SGC Tabela: produto”
+        </div>
+        <p style="margin-top:10px;">
+          Normalmente indica que o campo não foi criado em algum banco que participa da replicação (script não executou ou banco não atualizado).
+        </p>
+        <div class="callout ok">
+          ✅ <strong>Ação recomendada:</strong> garantir que todos os bancos estão atualizados e confirmar se o campo existe na tabela em todos eles.
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Exemplo 2 — Conflito de Foreign Key</h2>
+        <div class="callout danger">
+          ❌ <strong>Erro:</strong> “INSERT conflitou com FOREIGN KEY... tabela PRINCIPIO_ATIVO...”
+        </div>
+        <p style="margin-top:10px;">
+          Indica que o cadastro referenciado existe no banco de origem, mas não existe no banco de destino.
+        </p>
+        <div class="callout ok">
+          ✅ <strong>Ação recomendada:</strong> verificar o cadastro vinculado e garantir que ele exista/replica corretamente no banco de destino.
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Observações importantes</h2>
+        <ul>
+          <li>Em muitos casos o problema é banco “esquecido” na replicação (banco antigo ou não atualizado)</li>
+          <li>Antes de alterar exceções, sempre entender a causa raiz</li>
+          <li>Se envolver regra do cliente (não replicar campo), documentar a decisão e motivo</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

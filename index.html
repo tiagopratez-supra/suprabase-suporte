@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte SupraMAIS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
+
+  <div class="login-box">
+    <div class="login-brand">
+      <img src="img/logo.png" alt="SupraMAIS">
+      <div>
+        <h1>Base do Suporte</h1>
+        <p>Procedimentos e checklists</p>
+      </div>
+    </div>
+
+    <form id="loginForm">
+      <input type="text" id="usuario" placeholder="Usuário" autocomplete="username">
+      <input type="password" id="senha" placeholder="Senha" autocomplete="current-password">
+
+      <button type="submit">Entrar</button>
+      <p id="erro-login"></p>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Sempre que abrir a tela de login, garante que está deslogado
+    localStorage.removeItem("supra_auth");
+
+    // Enter para logar (submit do form)
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // evita recarregar a página
+      login();
+    });
+  </script>
+</body>
+</html>
